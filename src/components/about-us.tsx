@@ -14,8 +14,9 @@ export function AboutUs() {
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-        } else {
-          setIsVisible(false);
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current); // Prevents it from re-triggering
+          }
         }
       },
       { threshold: 0.1 }
