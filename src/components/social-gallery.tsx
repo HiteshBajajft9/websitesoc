@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["700"] });
 
 export function SocialGallery() {
   const cards = [
@@ -13,10 +16,15 @@ export function SocialGallery() {
 
   return (
     <section className="relative w-full py-12 flex flex-col items-center overflow-x-hidden">
-      {/* Title */}
-      <h2 className="text-5xl text-white font-bold mb-16 z-50 text-center tracking-widest uppercase">
-        OUR <span className="font-serif italic text-purple-400 normal-case tracking-normal">Blogs</span>
-      </h2>
+      {/* Title & Subtitle */}
+      <div className="flex flex-col items-center mb-20 z-50 text-center px-4">
+        <h2 className={`text-6xl md:text-7xl text-white tracking-widest uppercase ${spaceGrotesk.className} drop-shadow-2xl`}>
+          OUR BLOGS
+        </h2>
+        <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-light tracking-wide leading-relaxed">
+          Read them to increase your knowledge—our blogs cover a variety of cutting-edge topics based on Electronics, AI, and a bit of Computer Science.
+        </p>
+      </div>
 
       {/* Fan Gallery */}
       <div className="relative w-full max-w-7xl h-[400px] flex justify-center items-center">
