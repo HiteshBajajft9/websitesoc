@@ -49,10 +49,6 @@ export default function Home() {
       </div>
       <div className="relative z-10 w-full bg-black/40 backdrop-blur-sm pt-20 flex flex-col items-center">
         <SocialGallery />
-
-        {/* Aesthetic Section Divider */}
-        <div className="w-full max-w-5xl h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent my-10" />
-
         <Socials />
       </div>
     </>
