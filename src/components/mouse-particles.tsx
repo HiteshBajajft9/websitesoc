@@ -9,7 +9,7 @@ interface Particle {
   originY: number;
   vx: number;
   vy: number;
-  baseColorOffset: number;
+  color: string;
   size: number;
 }
 
@@ -40,9 +40,12 @@ export function MouseParticles() {
     const resizeListener = () => resizeCanvas();
     window.addEventListener('resize', resizeListener);
 
+    // Purple, blue, and a little shade of pink palette
+    const colors = ['#8b5cf6', '#3b82f6', '#ec4899', '#a855f7', '#60a5fa', '#d946ef'];
+
     // Initialize particles
     const particleCount = 700;
-    particlesRef.current = Array.from({ length: particleCount }, (_, i) => {
+    particlesRef.current = Array.from({ length: particleCount }, () => {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
       return {
@@ -52,7 +55,7 @@ export function MouseParticles() {
         originY: y,
         vx: (Math.random() - 0.5) * 2,
         vy: (Math.random() - 0.5) * 2,
-        baseColorOffset: i / particleCount,
+        color: colors[Math.floor(Math.random() * colors.length)],
         size: Math.random() * 1.5 + 0.5,
       };
     });
@@ -60,12 +63,12 @@ export function MouseParticles() {
     // Track mouse movement
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { 
-        x: e.clientX - rect.left, 
-        y: e.clientY - rect.top 
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
       };
     };
-    
+
     // Clear mouse position when it leaves
     const handleMouseLeave = () => {
       mouseRef.current = { x: -1000, y: -1000 };
@@ -95,11 +98,11 @@ export function MouseParticles() {
         const dy = particle.y - mouseRef.current.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Interaction with mouse (Repel + Swirl)
+        // Interaction with mouse (Repel + Swirl + Current Beam)
         if (distance < interactRadius && distance > 0) {
           const force = (interactRadius - distance) / interactRadius;
           const angle = Math.atan2(dy, dx);
-          
+
           // Repulse away from mouse
           particle.vx += Math.cos(angle) * force * repelForce;
           particle.vy += Math.sin(angle) * force * repelForce;
@@ -107,6 +110,35 @@ export function MouseParticles() {
           // Swirl tangentially
           particle.vx += Math.cos(angle + Math.PI / 2) * force * swirlForce;
           particle.vy += Math.sin(angle + Math.PI / 2) * force * swirlForce;
+
+          // Draw "lightning" connection to mouse
+          ctx.save();
+          ctx.globalAlpha = force * 0.6; // Slightly brighter for lightning
+          ctx.strokeStyle = particle.color;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          
+          const segments = 4;
+          for (let i = 1; i <= segments; i++) {
+            const t = i / segments;
+            let currentX = particle.x - dx * t;
+            let currentY = particle.y - dy * t;
+            
+            // Apply wild jitter to intermediate points to create lightning jags
+            if (i < segments) {
+              const jitterLimit = Math.min(30, distance * 0.2); // Cap jitter so it doesn't get ridiculously wide
+              const jitter = (Math.random() - 0.5) * jitterLimit * 2;
+              
+              // Perpendicular vector normalized
+              currentX += (-dy / distance) * jitter;
+              currentY += (dx / distance) * jitter;
+            }
+            ctx.lineTo(currentX, currentY);
+          }
+          
+          ctx.stroke();
+          ctx.restore();
         }
 
         // Gentle return to origin
@@ -127,10 +159,7 @@ export function MouseParticles() {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Color mapping based on white-to-black gradient
-        // baseColorOffset 0 = white, 1 = dark grey (so they aren't fully invisible)
-        const colorVal = Math.floor(255 - particle.baseColorOffset * 155);
-        ctx.strokeStyle = `rgb(${colorVal}, ${colorVal}, ${colorVal})`;
+        ctx.strokeStyle = particle.color;
         ctx.lineWidth = particle.size;
 
         // Render as dashes pointing along velocity vector
