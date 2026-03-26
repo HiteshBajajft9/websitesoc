@@ -14,8 +14,9 @@ export function AboutUs() {
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-        } else {
-          setIsVisible(false);
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current); // Prevents it from re-triggering
+          }
         }
       },
       { threshold: 0.1 }
@@ -33,8 +34,8 @@ export function AboutUs() {
   return (
     <section 
       ref={sectionRef}
-      className={`py-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center min-h-[60vh] transition-all duration-[1200ms] ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'
+      className={`py-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center min-h-[60vh] transition-all duration-500 ease-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
       <div className="flex flex-col items-start">
@@ -43,12 +44,12 @@ export function AboutUs() {
             About <span className="animate-text-color">Us</span>
           </h2>
           {/* Purple underlining line effect */}
-          <div className={`h-1.5 bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#8b5cf6] rounded-full mt-6 transition-all duration-[1500ms] delay-300 ease-out ${
+          <div className={`h-1.5 bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#8b5cf6] rounded-full mt-6 transition-all duration-500 delay-75 ease-out ${
             isVisible ? 'w-full md:w-48 opacity-100' : 'w-0 opacity-0'
           }`}></div>
         </div>
-        <div className={`text-left transition-all duration-[1200ms] delay-500 ease-out transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        <div className={`text-left transition-all duration-500 delay-100 ease-out transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <p className="text-white text-lg md:text-xl leading-relaxed opacity-90">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.
@@ -56,8 +57,8 @@ export function AboutUs() {
         </div>
       </div>
 
-      <div className={`relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-all duration-[1200ms] delay-[700ms] ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+      <div className={`relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 delay-150 ease-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}>
         <img 
           src="/batch.png" 
