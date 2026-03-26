@@ -1,5 +1,6 @@
 import { HeroSection } from '@/components/hero-section';
 import { AboutUs } from '@/components/about-us';
+import { UpcomingEvents } from '@/components/upcoming-events';
 import { InfiniteGallery } from '@/components/infinite-gallery';
 import { Testimonials } from '@/components/testimonials';
 import { SocialGallery } from '@/components/social-gallery';
@@ -49,10 +50,13 @@ export default function Home() {
         <AboutUs />
       </div>
 
-      <InfiniteGallery />
-
-      <div className="relative z-10 w-full bg-black/40 backdrop-blur-sm pt-20 flex flex-col items-center mb-10">
+      <div className="relative z-10 w-full bg-black/40 backdrop-blur-sm py-20 flex flex-col items-center mb-10">
         <SocialGallery />
+      </div>
+
+      <UpcomingEvents />
+
+      <div className="relative z-10 w-full pt-10 flex flex-col items-center mb-10">
         <Socials />
       </div>
 
