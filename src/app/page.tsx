@@ -1,4 +1,5 @@
 import { HeroSection } from '@/components/hero-section';
+import { AboutUs } from '@/components/about-us';
 import { Poppins, Montserrat } from 'next/font/google';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '700' });
@@ -42,7 +43,7 @@ export default function Home() {
 
       {/* Rest of your page content */}
       <div className="mt-20">
-        {/* Other sections */}
+        <AboutUs />
       </div>
     </>
   );
