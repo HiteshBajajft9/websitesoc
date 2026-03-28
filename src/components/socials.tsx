@@ -44,6 +44,19 @@ export function Socials() {
           </svg>
           <span className="tracking-wide text-lg">LinkedIn</span>
         </Link>
+
+        <Link
+          href="#"
+          className="group relative bg-black text-white font-semibold px-8 py-4 rounded-xl flex items-center gap-3
+                     shadow-[4px_4px_0px_0px_#8b5cf6] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]
+                     transition-all duration-200 border-4 border-black"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.6a5.6 5.6 0 0 0-1.6-4.1 5.6 5.6 0 0 0-.1-4.1s-1.3-.4-4 1.5a13.8 13.8 0 0 0-7 0C4.3 1.5 3 1.9 3 1.9a5.6 5.6 0 0 0-.1 4.1A5.6 5.6 0 0 0 1.5 10c0 3.6 3 5.6 6 5.6a4.8 4.8 0 0 0-1 3.2v4" />
+            <path d="M9 18c-4.5 1.5-5-2.5-7-3" />
+          </svg>
+          <span className="tracking-wide text-lg">GitHub</span>
+        </Link>
       </div>
     </section>
   );

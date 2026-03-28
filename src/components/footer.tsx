@@ -31,7 +31,9 @@ export const Footer = () => {
               <Link href="#" className="p-2 bg-white/5 rounded-full hover:bg-purple-500/20 text-zinc-400 hover:text-purple-400 transition-colors">
                 <Linkedin size={20} />
               </Link>
-             
+              <Link href="#" className="p-2 bg-white/5 rounded-full hover:bg-purple-500/20 text-zinc-400 hover:text-purple-400 transition-colors">
+                <Github size={20} />
+              </Link>
             </div>
           </div>
 
