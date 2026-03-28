@@ -5,6 +5,7 @@ import { InfiniteGallery } from '@/components/infinite-gallery';
 import { Testimonials } from '@/components/testimonials';
 import { SocialGallery } from '@/components/social-gallery';
 import { Socials } from '@/components/socials';
+import { Footer } from '@/components/footer';
 import { Poppins, Montserrat } from 'next/font/google';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '700' });
@@ -63,6 +64,8 @@ export default function Home() {
       <div className="mt-10 mb-20 relative z-10">
         <Testimonials />
       </div>
+
+      <Footer />
     </>
   );
 }
